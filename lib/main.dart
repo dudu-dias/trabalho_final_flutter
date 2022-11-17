@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:trabalho_final_flutter/screens/cadastro.dart';
 import 'package:trabalho_final_flutter/screens/login.dart';
 import 'package:trabalho_final_flutter/screens/menu.dart';
 
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
       initialRoute: Login.id,
       routes: {
         Login.id: (context) => Login(),
-        Menu.id: (context) => Menu(),
+        Menu.id: (context) => const Menu(),
+        Cadastro.id: (context) => Cadastro()
       },
     );
   }
