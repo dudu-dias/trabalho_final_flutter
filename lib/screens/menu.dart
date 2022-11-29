@@ -67,22 +67,8 @@ var db = FirebaseFirestore.instance;
                   ),
                 ),
               );
-              //return ListTile(
-             //   title: Text(document['nome']),
-             //   subtitle: Text((document['data_de_aniversario'])),
-             //   trailing:
-             //   IconButton(
-             //     icon: const Icon(
-             //       Icons.delete,
-             //     ),
-             //     onPressed: (){},
-             //   ),
-
-             // );
             });
-         //);
         },
-
       ),
     );
 
