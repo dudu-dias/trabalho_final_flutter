@@ -4,8 +4,6 @@ import 'package:trabalho_final_flutter/screens/cadastro.dart';
 import 'package:trabalho_final_flutter/screens/login.dart';
 import 'package:trabalho_final_flutter/screens/menu.dart';
 
-
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();

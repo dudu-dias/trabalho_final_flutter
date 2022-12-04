@@ -21,7 +21,7 @@ class _MenuState extends State<Menu> {
 
 
 var db = FirebaseFirestore.instance;
-
+var id = ' ';
 
 
   @override
@@ -56,13 +56,17 @@ var db = FirebaseFirestore.instance;
                       onPressed: (){},
                     ),
                     title: Text(document['nome']),
-                    subtitle: Text((document['data_de_aniversario'])),
+                    subtitle: Text(document['data_de_aniversario']),
                     trailing:
                     IconButton(
                       icon: const Icon(
                         Icons.delete,
                       ),
-                      onPressed: (){},
+                      onPressed: () =>
+                      {
+                        id = snapshot.data!.docs[index].id,
+                        deletaDados(id),
+                      }
                     ),
                   ),
                 ),
@@ -73,4 +77,16 @@ var db = FirebaseFirestore.instance;
     );
 
   }
+
+deletaDados(id) async {
+  var col = db.collection('recursos_humanos');
+  var ref = col.doc(id);
+
+  await ref.delete();
+
 }
+//Navigator.pop(context);
+
+}
+
+
