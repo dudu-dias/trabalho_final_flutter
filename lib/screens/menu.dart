@@ -22,6 +22,9 @@ class _MenuState extends State<Menu> {
 
 var db = FirebaseFirestore.instance;
 var id = ' ';
+var nome = ' ';
+var dataDeNascimento = ' ';
+Person person = Person(documentId: '', name: '', birthDate: '');
 
 
   @override
@@ -35,7 +38,16 @@ var id = ' ';
         backgroundColor: Colors.blue,
         foregroundColor: Colors.yellow,
         child: Icon(Icons.add),
-        onPressed: () {Navigator.pushNamed(context, Cadastro.id);},
+        onPressed: () =>
+        {
+          //{Navigator.pushNamed(context, Cadastro.id);},
+          person.documentId = ' ',
+          person.name = " ",
+          person.birthDate = " ",
+          Navigator.of(context).pushNamed(
+              Cadastro.id,
+              arguments: person),
+        }
       ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection('recursos_humanos').snapshots(),
@@ -53,7 +65,14 @@ var id = ' ';
                       icon: const Icon(
                         Icons.edit,
                       ),
-                      onPressed: (){},
+                      onPressed: () => {
+                        person.documentId = snapshot.data!.docs[index].id,
+                        person.name = document['nome'],
+                        person.birthDate = document['data_de_aniversario'],
+                          Navigator.of(context).pushNamed(
+                           Cadastro.id,
+                           arguments: person),
+                      },
                     ),
                     title: Text(document['nome']),
                     subtitle: Text(document['data_de_aniversario']),

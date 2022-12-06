@@ -1,10 +1,14 @@
 class Person  {
-  String _documentId = '';
+  String documentId = '';
   String name = '';
-  bool active = true;
   String birthDate = '';
 
-  Person(this._documentId,this.name,this.active,this.birthDate);
+  Person({
+    required this.documentId,
+    required this.name,
+    required this.birthDate
+
+});
 
 
 
