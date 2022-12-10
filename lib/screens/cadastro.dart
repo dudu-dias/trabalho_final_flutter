@@ -11,6 +11,8 @@ class Cadastro extends StatelessWidget{
   var idDocument = ' ';
   var nome = ' ';
   var dataDeNascimento = ' ';
+  var endereco = ' ';
+  var telefone = ' ';
   static const enabled = true;
 
   var db = FirebaseFirestore.instance;
@@ -22,6 +24,9 @@ class Cadastro extends StatelessWidget{
       idDocument = args.documentId;
       nome = args.name;
       dataDeNascimento = args.birthDate;
+      endereco = args.address;
+      telefone = args.phone;
+
     }
 
     return Scaffold(
@@ -30,7 +35,7 @@ class Cadastro extends StatelessWidget{
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(50.0),
+          padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 30),
           child: Column(
             children: [
               TextFormField(
@@ -47,7 +52,21 @@ class Cadastro extends StatelessWidget{
                 ),
                 onChanged: (value) => dataDeNascimento = value,
               ),
-              const SizedBox(height: 32),
+              TextFormField(
+                initialValue: endereco,
+                decoration: const InputDecoration(
+                    label: Text("Digite o seu endereço")
+                ),
+                onChanged: (value) => endereco = value,
+              ),
+              TextFormField(
+                initialValue: telefone,
+                decoration: const InputDecoration(
+                    label: Text("Digite o seu telefone")
+                ),
+                onChanged: (value) => telefone = value,
+              ),
+              const SizedBox(height: 10),
               ElevatedButton(style: ElevatedButton.styleFrom(
                     minimumSize: Size(100, 36),
                     shape: const RoundedRectangleBorder(
@@ -56,7 +75,6 @@ class Cadastro extends StatelessWidget{
                   ),
                   onPressed: () =>
                     salvaDados(context),
-                    //Navigator.pop(context);
                   child: const Text('Salvar',
                   style: TextStyle(
                     fontSize: 12,
@@ -74,18 +92,20 @@ class Cadastro extends StatelessWidget{
     print(idDocument);
     var col = db.collection('recursos_humanos');
     if(idDocument != ' '){
-      print("Entrei no if");
       var ref = col.doc(idDocument);
       await ref.update({
         "nome": nome,
         "data_de_aniversario": dataDeNascimento,
+        "telefone":telefone,
+        "endereco":endereco
       }).then((value) => Navigator.pop(context));
     }else{
-      print("Entrei no else");
       var ref = col.doc();
       await ref.set({
         "nome": nome,
         "data_de_aniversario": dataDeNascimento,
+        "telefone":telefone,
+        "endereco":endereco
       }).then((value) => Navigator.pop(context));
     }
 
